@@ -10,8 +10,10 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <main className="min-h-[calc(100vh-68px)] flex flex-col items-center justify-center bg-background text-foreground dark">
-      <h1 className="text-4xl font-bold mb-8">Cross-Chain Messaging DApp</h1>
+    <main className="min-h-[calc(100vh-68px)] flex flex-col items-center justify-center bg-background text-foreground dark px-2">
+      <h1 className="text-4xl text-center font-bold mb-8">
+        Cross-Chain Messaging DApp
+      </h1>
       <Button
         size="lg"
         disabled={connecting}
