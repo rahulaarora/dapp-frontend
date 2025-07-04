@@ -3,6 +3,12 @@
 import { ethers } from "ethers";
 import { ReactNode, useState, useContext, createContext } from "react";
 
+declare global {
+  interface Window {
+    ethereum?: ethers.Eip1193Provider;
+  }
+}
+
 export interface WalletContextType {
   address: string | null;
   setAddress: (address: string | null) => void;
@@ -21,15 +27,16 @@ export function WalletProvider({ children }: { children: ReactNode }) {
   const connectWallet = async () => {
     setConnecting(true);
     try {
-      if (typeof window === "undefined" || !(window as any).ethereum) {
+      if (typeof window === "undefined" || !window.ethereum) {
         alert("MetaMask is not installed");
         setConnecting(false);
         return;
       }
-      const provider = new ethers.BrowserProvider((window as any).ethereum);
+      const provider = new ethers.BrowserProvider(window.ethereum);
       const accounts = await provider.send("eth_requestAccounts", []);
       setAddress(accounts[0]);
     } catch (err) {
+      console.error("Failed to connect wallet:", err);
       alert("Failed to connect wallet");
     } finally {
       setConnecting(false);

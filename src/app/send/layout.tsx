@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     if (!address) {
       router.push("/");
     }
-  }, [address]);
+  }, [address, router]);
 
   if (!address) {
     return (

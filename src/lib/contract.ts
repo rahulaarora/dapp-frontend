@@ -1,6 +1,12 @@
 import { ethers } from "ethers";
 import { CHAINS, INTERCHAIN_MESSAGING_ABI } from "./constants";
 
+declare global {
+  interface Window {
+    ethereum?: ethers.Eip1193Provider;
+  }
+}
+
 export const sendMessage = async ({
   source,
   destination,
@@ -19,11 +25,11 @@ export const sendMessage = async ({
 
   try {
     // wallet connection check
-    if (!(window as any).ethereum) {
+    if (!window.ethereum) {
       throw new Error("No wallet found. Please install MetaMask.");
     }
 
-    const provider = new ethers.BrowserProvider((window as any).ethereum);
+    const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
 
     const sourceContractAddress = sourceChain.deployedReceiver;
@@ -58,7 +64,7 @@ export const sendMessage = async ({
       success: true,
       transactionHash: tx.hash,
     };
-  } catch (error: Error | unknown) {
+  } catch (error: unknown) {
     return {
       success: false,
       error: error instanceof Error ? error.message : "Failed to send message",
