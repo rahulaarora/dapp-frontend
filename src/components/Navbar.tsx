@@ -20,23 +20,29 @@ export default function Navbar() {
         </Link>
         <div className="space-x-4">
           {address ? (
-            <Button
-              className="text-sm"
-              variant="outline"
-              onClick={disconnectWallet}
-            >
-              Disconnect Wallet
-            </Button>
+            <div key="disconnect">
+              <Button
+                className="text-sm"
+                variant="outline"
+                onClick={disconnectWallet}
+              >
+                Disconnect Wallet
+              </Button>
+            </div>
           ) : (
-            <Button onClick={connectWallet} disabled={connecting}>
-              {connecting ? "Connecting..." : "Connect Wallet"}
-              <Image
-                src={"/MetaMask-icon-fox.svg"}
-                alt="MetaMask"
-                width={20}
-                height={20}
-              />
-            </Button>
+            <div key="connect">
+              <Button onClick={connectWallet} disabled={connecting}>
+                {connecting ? "Connecting..." : "Connect Wallet"}
+                <div>
+                  <Image
+                    src={"/MetaMask-icon-fox.svg"}
+                    alt="MetaMask"
+                    width={20}
+                    height={20}
+                  />
+                </div>
+              </Button>
+            </div>
           )}
         </div>
       </div>

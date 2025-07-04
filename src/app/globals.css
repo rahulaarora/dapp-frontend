@@ -119,4 +119,23 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: var(--radius-xs);
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #222;
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-color: #555 #222;
+    scrollbar-width: thin;
+  }
 }
