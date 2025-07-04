@@ -14,7 +14,7 @@ export default function Navbar() {
 
   return (
     <nav className="w-full sticky top-0 bg-background">
-      <div className="flex justify-between items-center p-4">
+      <div className="flex justify-between items-center p-4 gap-5">
         <Link href="/" className="text-base md:text-lg font-bold">
           Cross-Chain Messaging
         </Link>
